@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garance Lucken | Personal Portfolio & Weekly Work</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4ead8;
+            --bg-soft: #f8f1e6;
+            --surface: #fffaf2;
+            --surface-strong: #f0e1c9;
+            --text: #2b201a;
+            --muted: #6c5a4f;
+            --deep-red: #6f1d1b;
+            --deep-red-2: #8b2f2a;
+            --forest: #18342f;
+            --teal-dark: #244a53;
+            --line: rgba(111, 29, 27, 0.14);
+            --shadow: 0 24px 60px rgba(45, 25, 18, 0.12);
+            --shadow-soft: 0 12px 30px rgba(45, 25, 18, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(111, 29, 27, 0.12), transparent 32%),
+                radial-gradient(circle at top right, rgba(24, 52, 47, 0.16), transparent 28%),
+                linear-gradient(180deg, var(--bg) 0%, #efe2cf 54%, #e8d4b6 100%);
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(111, 29, 27, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(111, 29, 27, 0.04) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 85%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .shell {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(14px);
+            background: rgba(244, 234, 216, 0.78);
+            border-bottom: 1px solid rgba(111, 29, 27, 0.08);
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--deep-red);
+        }
+
+        .brand-mark {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--deep-red), var(--forest));
+            box-shadow: 0 0 0 6px rgba(111, 29, 27, 0.12);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 18px;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--deep-red);
+            border-color: var(--deep-red);
+        }
+
+        .hero {
+            padding: 64px 0 28px;
+        }
+
+        .hero-panel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 32px;
+            background:
+                linear-gradient(135deg, rgba(111, 29, 27, 0.97), rgba(24, 52, 47, 0.94)),
+                linear-gradient(135deg, #6f1d1b, #18342f);
+            color: #f9f0df;
+            box-shadow: var(--shadow);
+            padding: 42px;
+        }
+
+        .hero-panel::before,
+        .hero-panel::after {
+            content: '';
+            position: absolute;
+            border-radius: 999px;
+            opacity: 0.16;
+            filter: blur(2px);
+        }
+
+        .hero-panel::before {
+            width: 360px;
+            height: 360px;
+            right: -120px;
+            top: -120px;
+            background: radial-gradient(circle, #f4ead8 0%, transparent 68%);
+        }
+
+        .hero-panel::after {
+            width: 280px;
+            height: 280px;
+            left: -90px;
+            bottom: -120px;
+            background: radial-gradient(circle, #d7c19d 0%, transparent 68%);
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 28px;
+            align-items: end;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 250, 242, 0.12);
+            color: #f5e9d4;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d7c19d;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-family: 'Fraunces', serif;
+            line-height: 1.05;
+        }
+
+        h1 {
+            max-width: 10ch;
+            font-size: clamp(3rem, 7vw, 5.9rem);
+            letter-spacing: -0.04em;
+        }
+
+        .hero-copy {
+            max-width: 720px;
+            margin-top: 18px;
+            font-size: 1.08rem;
+            color: rgba(249, 240, 223, 0.88);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: #f4ead8;
+            color: var(--deep-red);
+        }
+
+        .button.secondary {
+            border: 1px solid rgba(244, 234, 216, 0.35);
+            color: #f4ead8;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-card {
+            align-self: stretch;
+            border-radius: 24px;
+            padding: 24px;
+            background: rgba(255, 250, 242, 0.1);
+            border: 1px solid rgba(255, 250, 242, 0.14);
+            display: grid;
+            gap: 18px;
+        }
+
+        .mini-card {
+            background: rgba(255, 250, 242, 0.92);
+            color: var(--text);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .mini-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .stat {
+            display: grid;
+            gap: 2px;
+        }
+
+        .stat strong {
+            font-family: 'Fraunces', serif;
+            font-size: 1.7rem;
+            color: var(--forest);
+        }
+
+        .section {
+            padding: 30px 0 18px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            max-width: 58ch;
+            color: var(--muted);
+        }
+
+        .section-kicker {
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--deep-red);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card {
+            background: rgba(255, 250, 242, 0.85);
+            border: 1px solid rgba(111, 29, 27, 0.12);
+            border-radius: 26px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        .about-main,
+        .about-side,
+        .weekly-intro,
+        .timeline,
+        .skills-grid {
+            padding: 26px;
+        }
+
+        .about-main p,
+        .weekly-intro p,
+        .timeline p {
+            color: var(--muted);
+            margin: 0 0 14px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .pill {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(111, 29, 27, 0.08);
+            color: var(--deep-red);
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .info-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .info-item {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(24, 52, 47, 0.08), rgba(111, 29, 27, 0.06));
+            border: 1px solid rgba(36, 74, 83, 0.1);
+        }
+
+        .info-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--forest);
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+        }
+
+        .timeline-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .timeline-item {
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 250, 242, 0.96), rgba(240, 225, 201, 0.72));
+            border: 1px solid rgba(111, 29, 27, 0.1);
+            display: grid;
+            gap: 6px;
+        }
+
+        .timeline-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .timeline-item h3,
+        .week-card h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.08rem;
+            color: var(--deep-red);
+            line-height: 1.3;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .skill-card {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(24, 52, 47, 0.06);
+            border: 1px solid rgba(24, 52, 47, 0.1);
+        }
+
+        .skill-card h3 {
+            font-family: 'Manrope', sans-serif;
+            color: var(--forest);
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .weekly-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .week-card {
+            min-height: 250px;
+            padding: 22px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(255, 250, 242, 0.98), rgba(244, 234, 216, 0.92));
+            border: 1px solid rgba(111, 29, 27, 0.12);
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .week-card::after {
+            content: '';
+            position: absolute;
+            inset: auto -40px -45px auto;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(111, 29, 27, 0.14), transparent 68%);
+        }
+
+        .week-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .week-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(111, 29, 27, 0.1);
+            color: var(--deep-red);
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .week-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--forest);
+        }
+
+        .week-slot {
+            flex: 1;
+            min-height: 112px;
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px dashed rgba(36, 74, 83, 0.28);
+            background: rgba(24, 52, 47, 0.05);
+            color: var(--muted);
+            white-space: pre-wrap;
+        }
+
+        .week-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: var(--forest);
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 28px 0 36px;
+            color: rgba(43, 32, 26, 0.78);
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 960px) {
+            .hero-grid,
+            .about-grid,
+            .weekly-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .shell {
+                width: min(100% - 20px, 1180px);
+            }
+
+            .hero {
+                padding-top: 18px;
+            }
+
+            .hero-panel,
+            .about-main,
+            .about-side,
+            .weekly-intro,
+            .timeline,
+            .skills-grid {
+                padding: 20px;
+            }
+
+            .hero-panel {
+                border-radius: 24px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                font-size: 0.86rem;
+            }
+
+            h1 {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="shell topbar-inner">
+            <a class="brand" href="#accueil">
+                <span class="brand-mark" aria-hidden="true"></span>
+                Garance Lucken
+            </a>
+            <nav class="nav-links" aria-label="Navigation principale">
+                <a href="#about">About</a>
+                <a href="#cv">CV</a>
+                <a href="#skills">Skills</a>
+                <a href="#weeks">Weeks</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="accueil">
+            <div class="shell hero-panel">
+                <div class="hero-grid">
+                    <div>
+                        <div class="eyebrow">Personal website and weekly work log</div>
+                        <h1>Garance Lucken</h1>
+                        <p class="hero-copy">
+                            I come from statistics and data science, with experience in analysis, visualization,
+                            Python, R, and reproducible workflows. This page is my personal website and a clean
+                            place to publish weekly work.
+                        </p>
+                        <div class="hero-actions">
+                            <a class="button primary" href="#weeks">See the weekly sections</a>
+                            <a class="button secondary" href="#cv">Read my profile</a>
+                        </div>
+                    </div>
+
+                    <aside class="hero-card" aria-label="Quick summary">
+                        <div class="mini-card stat">
+                            <span class="mini-title">Based in</span>
+                            <strong>Geneva, Switzerland</strong>
+                            <span>Mathematics, statistics, and biostatistics background.</span>
+                        </div>
+                        <div class="mini-card stat">
+                            <span class="mini-title">Profile</span>
+                            <strong>Data Scientist</strong>
+                            <span>Analysis, documentation, pipelines, and visualization.</span>
+                        </div>
+                        <div class="mini-card stat">
+                            <span class="mini-title">GitHub</span>
+                            <strong><a href="https://github.com/your-github-username" target="_blank" rel="noreferrer">github.com/your-github-username</a></strong>
+                            <span>Replace with your own GitHub profile.</span>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <div class="section-kicker">About</div>
+                        <h2>A personal site that feels finished</h2>
+                    </div>
+                    <p>
+                        The goal is a polished page with a strong visual identity and a weekly area that already
+                        feels like a real portfolio.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <article class="card about-main">
+                        <h3 style="margin-bottom: 14px; color: var(--forest);">Who I am</h3>
+                        <p>
+                            I am Garance Lucken. I hold a bachelor's and a master's degree in mathematics from the
+                            University of Geneva, with a focus on statistics and probability. My path led me toward
+                            data science, biological data analysis, and visualization.
+                        </p>
+                        <p>
+                            I have worked on analysis pipelines in Python and R, data quality, structuring,
+                            reproducibility, and reporting. I wanted a site that feels warm and personal, but still
+                            clean and professional.
+                        </p>
+                        <div class="pill-row" aria-label="Keywords">
+                            <span class="pill">Python</span>
+                            <span class="pill">R</span>
+                            <span class="pill">Statistics</span>
+                            <span class="pill">Biostatistics</span>
+                            <span class="pill">Git / GitHub</span>
+                            <span class="pill">Docker</span>
+                        </div>
+                    </article>
+
+                    <aside class="card about-side">
+                        <h3 style="margin-bottom: 14px; color: var(--forest);">Quick facts</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <strong>Location</strong>
+                                Geneva, Switzerland
+                            </div>
+                            <div class="info-item">
+                                <strong>Focus</strong>
+                                Statistics, data analysis, and scientific reporting
+                            </div>
+                            <div class="info-item">
+                                <strong>Languages</strong>
+                                French, English, Italian
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="cv">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <div class="section-kicker">CV</div>
+                        <h2>Education and experience</h2>
+                    </div>
+                    <p>
+                        The essential parts of the CV are distilled here into a readable section that fits the page.
+                    </p>
+                </div>
+
+                <div class="timeline card timeline-grid">
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span>Sep 2015 - Sep 2018</span>
+                            <span>University of Geneva</span>
+                        </div>
+                        <h3>Bachelor's degree in Mathematics</h3>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span>Sep 2018 - Dec 2020</span>
+                            <span>University of Geneva</span>
+                        </div>
+                        <h3>Master's degree in Mathematics, Statistics & Probability</h3>
+                        <p>Thesis: application of machine learning (lasso-zero) to the optimization of biological data analysis.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span>Oct 2025 - Mar 2026</span>
+                            <span>Geneva Institute of Global Health</span>
+                        </div>
+                        <h3>Data Scientist - BNF project</h3>
+                        <p>Health data analysis, Python / R pipelines, quality control, cleaning, structuring, visualizations, and methodological documentation.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span>Mar 2023 - Feb 2024</span>
+                            <span>AC Immune SA</span>
+                        </div>
+                        <h3>Data Science Intern</h3>
+                        <p>Biological and clinical data analysis, interactive R Shiny tools, meta-analysis, reporting, and multidisciplinary collaboration.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span>References</span>
+                            <span>Available on request</span>
+                        </div>
+                        <h3>Olivia Keiser, Jonathan Wagg, Sylvain Sardy</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <div class="section-kicker">Skills</div>
+                        <h2>What I bring</h2>
+                    </div>
+                    <p>
+                        A compact summary of the CV so the page also works as a small personal portfolio.
+                    </p>
+                </div>
+
+                <div class="skills-grid card">
+                    <div class="skill-card">
+                        <h3>Programming</h3>
+                        <p>Python, R, C, Bash, SQL.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Biostatistics</h3>
+                        <p>Statistical analysis, modeling, machine learning, scientific visualization.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Tools</h3>
+                        <p>Git / GitHub, Docker, reproducible pipelines.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Languages</h3>
+                        <p>French native, English C1, Italian B1.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="weeks">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <div class="section-kicker">Weekly work</div>
+                        <h2>Eight sections ready for your work</h2>
+                    </div>
+                    <p>
+                        Each block is laid out like a finished card, so you can drop in the content for each week
+                        without changing the design.
+                    </p>
+                </div>
+
+                <div class="weekly-intro card" style="margin-bottom: 18px;">
+                    <p>
+                        Use each card for a weekly summary, project link, notes, or deliverable.
+                    </p>
+                </div>
+
+                <div class="weekly-grid">
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 1</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: introduction</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 2</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: analysis</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 3</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: research</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 4</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: tools</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 5</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: workflow</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 6</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: communication</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 7</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: project draft</span><span>Ready for content</span></div>
+                    </article>
+                    <article class="week-card">
+                        <div class="week-top">
+                            <span class="week-badge">Week 8</span>
+                        </div>
+                        <div class="week-slot">Add the title of the work, a short summary, the objective, and any useful link or note here.</div>
+                        <div class="week-footer"><span>Theme: final showcase</span><span>Ready for content</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell">
+            <p>Garance Lucken - personal site and weekly work log, no images for now.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (event) => {
+                const targetId = anchor.getAttribute('href');
+                if (!targetId || targetId === '#') {
+                    return;
+                }
+
+                const target = document.querySelector(targetId);
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
